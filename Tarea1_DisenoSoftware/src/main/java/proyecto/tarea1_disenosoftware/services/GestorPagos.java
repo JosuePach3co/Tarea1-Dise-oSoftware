@@ -28,11 +28,11 @@ public class GestorPagos {
         return pagoExitoso;
     }
 
-    public void iniciarTemporizador() {
+    public void iniciarTemporizador(Compra compra) {
         // Lógica para iniciar el timer
     }
 
-    public void liberarAsientos() {
+    public void liberarAsientos(Compra compra) {
         // Lógica para obtener los asientos.
 
     }

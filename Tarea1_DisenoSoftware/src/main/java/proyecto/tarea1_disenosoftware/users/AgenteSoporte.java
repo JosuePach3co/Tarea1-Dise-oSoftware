@@ -12,10 +12,10 @@ import proyecto.tarea1_disenosoftware.interfaces.GestionSoporte;
  */
 public class AgenteSoporte implements GestionSoporte {
 
-    private List<Reporte> reportesAsignados;
+    private List<Reporte> reportes;
 
     public AgenteSoporte() {
-        this.reportesAsignados = new ArrayList<>();
+        this.reportes = new ArrayList<>();
     }
        
 
@@ -30,11 +30,11 @@ public class AgenteSoporte implements GestionSoporte {
     }
 
     public List<Reporte> getReportesAsignados() {
-        return reportesAsignados;
+        return reportes;
     }
 
     public void setReportesAsignados(List<Reporte> reportesAsignados) {
-        this.reportesAsignados = reportesAsignados;
+        this.reportes = reportesAsignados;
     }
     
     

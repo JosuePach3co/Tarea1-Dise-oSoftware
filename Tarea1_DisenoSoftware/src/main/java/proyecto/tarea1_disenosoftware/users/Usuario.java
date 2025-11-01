@@ -15,7 +15,7 @@ import proyecto.tarea1_disenosoftware.Reporte;
 public class Usuario {
     
     private List<Boleto> boletos;
-    private List<Reporte> reportesGenerados;
+    private List<Reporte> reportes;
 
     public Usuario() {
     }
@@ -23,7 +23,7 @@ public class Usuario {
     
     public Usuario(List boletos, List reportesGenerados) {
         this.boletos = boletos;
-        this.reportesGenerados = reportesGenerados;
+        this.reportes = reportesGenerados;
     }
     
 
@@ -36,11 +36,11 @@ public class Usuario {
     }
 
     public List getReportesGenerados() {
-        return reportesGenerados;
+        return reportes;
     }
 
     public void setReportesGenerados(List reportesGenerados) {
-        this.reportesGenerados = reportesGenerados;
+        this.reportes = reportesGenerados;
     }
     
     
