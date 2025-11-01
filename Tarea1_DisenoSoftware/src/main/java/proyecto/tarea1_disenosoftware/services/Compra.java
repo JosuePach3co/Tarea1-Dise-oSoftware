@@ -23,6 +23,14 @@ public class Compra {
         this.usuario = usuario;
         this.asientos = new ArrayList<>();
     }
+    
+    public double calcularTotal() {
+        double total = 0;
+        for (Asiento asiento : asientos) {
+            total += asiento.getPrecio(); 
+        }
+        return total;
+    }
 
     public int getIdCompra() {
         return idCompra;
