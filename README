@@ -1,0 +1,36 @@
+PROYECTO: Sistema de Gestión de Cine
+CURSO: Diseño de Software
+
+
+INTEGRANTES:
+- Arihuz124 (Arihuz Icaza)
+- MGabrielaVillon (María Gabriela Villón)
+- JosuePach3co (Josué Pacheco)
+
+DESCRIPCIÓN GENERAL:
+Este proyecto corresponde a la Tarea 1 del curso Diseño de Software.
+Consiste en el desarrollo de un sistema de gestión de funciones de cine,
+donde se modelan los procesos de compra, reserva y gestión de asientos,
+utilizando los diagramas UML elaborados en Visual Paradigm.
+
+Los diagramas incluyen:
+- Diagrama de Casos de Uso
+- Diagrama de Clases
+- Diagramas de Secuencia
+
+Los modelos UML fueron exportados desde Visual Paradigm y utilizados para generar
+las clases Java correspondientes, aplicando los principios SOLID.
+
+CONTENIDO DEL REPOSITORIO:
+- Carpeta `Tarea1_DisenoSoftware`: Código fuente en Java.
+- Archivo `diagramas visual paradigm.zip`: Diagramas UML exportados desde Visual Paradigm.
+- Archivo `README.txt`: Descripción general del proyecto.
+- Evidencia de commits de los tres integrantes (control de versiones).
+
+CONTROL DE VERSIONES:
+El proyecto fue gestionado mediante GitHub con ramas y commits colaborativos.
+Cada integrante aportó al código, los diagramas y la solución de errores.
+Los commits visibles en el repositorio muestran la participación equitativa del equipo.
+
+ENLACE DEL REPOSITORIO:
+https://github.com/JosuePach3co/Tarea1-DisenoSoftware
