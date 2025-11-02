@@ -1,63 +1,45 @@
-
 package proyecto.tarea1_disenosoftware.services;
 
-import java.util.ArrayList;
-import java.util.List;
-import proyecto.tarea1_disenosoftware.Asiento;
+import proyecto.tarea1_disenosoftware.*;
+import proyecto.tarea1_disenosoftware.interfaces.Notificador;
 import proyecto.tarea1_disenosoftware.users.Usuario;
 
-/**
- *
- * @author pc
- */
+import java.util.List;
+
 public class Compra {
-    private int idCompra;
-    private Usuario usuario;
-    private List<Asiento> asientos;
-    
-    public Compra(){
-        this.asientos = new ArrayList<>();
+
+    private final GestorPagos gestorPagos;
+    private final Notificador notificador;
+
+    public Compra(GestorPagos gestorPagos, Notificador notificador) {
+        this.gestorPagos = gestorPagos;
+        this.notificador = notificador;
     }
-    
-    public Compra(Usuario usuario) {
-        this.usuario = usuario;
-        this.asientos = new ArrayList<>();
+
+    // ==== Selección y bloqueo (fase B) ====
+    public void seleccionarAsientos(String sesionId, Funcion funcion, List<String> ids, int segundos) {
+        List<Asiento> seleccion = funcion.getSala().getAsientosPorId(ids);
+        gestorPagos.iniciarTemporizador(sesionId, seleccion, segundos); // marca EN_PROCESO y programa timeout
     }
-    
-    public double calcularTotal() {
-        double total = 0;
-        for (Asiento asiento : asientos) {
-            total += asiento.getPrecio(); 
+
+    // ==== Confirmación de compra (alt aprobado / alt rechazado) ====
+    public boolean confirmarCompra(Usuario u, Funcion funcion, List<String> ids, String tarjeta) {
+        List<Asiento> seleccion = funcion.getSala().getAsientosPorId(ids);
+
+        double total = 0.0;
+        for (Asiento a : seleccion) {
+            total += funcion.tarifaDe(a.getTipo());
         }
-        return total;
-    }
 
-    public int getIdCompra() {
-        return idCompra;
+        boolean ok = gestorPagos.procesarPago(tarjeta, total);
+        if (ok) {
+            for (Asiento a : seleccion) a.marcarReservado(); // loop reservar
+            notificador.enviarNotificacion(u, "Compra confirmada");
+            return true;
+        } else {
+            gestorPagos.liberarAsientos(seleccion); // alt rechazo
+            notificador.enviarNotificacion(u, "Pago rechazado");
+            return false;
+        }
     }
-
-    public void setIdCompra(int idCompra) {
-        this.idCompra = idCompra;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public List<Asiento> getAsientos() {
-        return asientos;
-    }
-
-    public void setAsientos(List<Asiento> asientos) {
-        this.asientos = asientos;
-    }
-    
-    
-        
-        
-    
 }

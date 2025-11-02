@@ -1,31 +1,41 @@
-
 package proyecto.tarea1_disenosoftware;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.EnumMap;
+import java.util.Map;
 
-/**
- *
- * @author pc
- */
 public class Funcion {
-    private Date hora;
-    private Sala sala;
+    private final String id;
+    private final Sala sala;
+    private LocalDateTime fechaHora;
+    private final Map<TipoAsiento, Double> tarifaPorTipo = new EnumMap<>(TipoAsiento.class);
 
-    public Funcion(Sala sala, Date hora) {
+    public Funcion(String id, Sala sala, LocalDateTime fechaHora) {
+        this.id = id;
         this.sala = sala;
-        this.hora = hora;
+        this.fechaHora = fechaHora;
+        // tarifas por defecto
+        tarifaPorTipo.put(TipoAsiento.ESTANDAR, 5.0);
+        tarifaPorTipo.put(TipoAsiento.VIP, 8.0);
+        tarifaPorTipo.put(TipoAsiento.CUATRO_D, 10.0);
     }
 
-    public Sala getSala() {
-        return sala;
+    public String getId() { return id; }
+    public Sala getSala() { return sala; }
+    public LocalDateTime getFechaHora() { return fechaHora; }
+
+    // ==== usado en Caso 2 (self-call en tu diagrama) ====
+    public void actualizarDatos(LocalDateTime nuevaFechaHora) {
+        this.fechaHora = nuevaFechaHora;
     }
 
-    public Date getHora() {
-        return hora;
+    // ==== usado en Caso 2 (loop por tipo de asiento) ====
+    public void aplicarTarifa(TipoAsiento tipo, double valor) {
+        tarifaPorTipo.put(tipo, valor);
     }
 
-    public void setHora(Date hora) {
-        this.hora = hora;
+    // ==== usado en Caso 1 para calcular total ====
+    public double tarifaDe(TipoAsiento tipo) {
+        return tarifaPorTipo.getOrDefault(tipo, 0.0);
     }
-    
 }

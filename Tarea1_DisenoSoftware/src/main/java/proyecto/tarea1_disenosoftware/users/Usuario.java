@@ -16,6 +16,8 @@ public class Usuario {
     
     private List<Boleto> boletos;
     private List<Reporte> reportes;
+    private String correo;
+
 
     public Usuario() {
     }
@@ -42,6 +44,9 @@ public class Usuario {
     public void setReportesGenerados(List reportesGenerados) {
         this.reportes = reportesGenerados;
     }
-    
+    public String getCorreo() {
+    return this.correo;
+    }
+
     
 }
