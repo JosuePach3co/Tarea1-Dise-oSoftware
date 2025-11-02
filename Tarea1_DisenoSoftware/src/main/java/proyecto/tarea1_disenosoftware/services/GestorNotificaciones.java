@@ -15,6 +15,10 @@ public class GestorNotificaciones implements Notificador {
 
     @Override
     public void enviarNotificacion(Usuario usuario, String mensaje) {
-        System.out.println("Enviando a " + usuario + ": " + mensaje);
+        if (usuario == null) {
+            System.out.println("[GestorNotificaciones] Usuario nulo: " + mensaje);
+            return;
+        }
+        System.out.println("[Notificación] A usuario: " + mensaje);
     }
 }
