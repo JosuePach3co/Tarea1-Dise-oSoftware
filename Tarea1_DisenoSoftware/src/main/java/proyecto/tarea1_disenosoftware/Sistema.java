@@ -28,6 +28,7 @@ public class Sistema {
             gestorNotificaciones.enviarNotificacion(u, "La función fue reprogramada a: " + nuevaHora);
         }
         return true;
+        
     }
 }
 
