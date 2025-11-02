@@ -5,17 +5,21 @@ import proyecto.tarea1_disenosoftware.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import proyecto.tarea1_disenosoftware.users.Usuario;
 
 public class GestorFunciones {
 
     // listas simples para cumplir el diagrama (puedes adaptarlas a tu código real)
-    private final List<Sala> salas;
-    private final List<Funcion> funciones;
-
-    public GestorFunciones(List<Sala> salas, List<Funcion> funciones) {
-        this.salas = salas;
-        this.funciones = funciones;
+    private List<Sala> salas; 
+    private List<Funcion> funciones;
+    private List<Usuario> lstaUsuariosAfectados;
+    
+    public GestorFunciones() {
+      this.salas = new ArrayList<>();
+      this.funciones = new ArrayList<>();
+      this.lstaUsuariosAfectados = new ArrayList<>();
     }
+    
 
     // ==== Lo que "ve" el admin (listar funciones y salas) ====
     public List<String> listarFuncionesYSalas() {
@@ -27,13 +31,14 @@ public class GestorFunciones {
     }
 
     // ==== Caso 2: self-call en Funcion ====
-    public void modificarDatos(String idFuncion, LocalDateTime nuevaFecha) {
+    public boolean modificarDatos(String idFuncion, LocalDateTime nuevaFecha) {
         for (Funcion f : funciones) {
             if (f.getId().equals(idFuncion)) {
                 f.actualizarDatos(nuevaFecha);
-                break;
+                return true;
             }
         }
+        return false;
     }
 
     // ==== Caso 2: loop por tipo de asiento en todas las funciones ====
@@ -42,4 +47,9 @@ public class GestorFunciones {
             f.aplicarTarifa(tipo, nuevaTarifa);
         }
     }
+    
+    public List<Usuario> getListaUsuarioAfectados() {
+        return this.lstaUsuariosAfectados;
+    }
+
 }
