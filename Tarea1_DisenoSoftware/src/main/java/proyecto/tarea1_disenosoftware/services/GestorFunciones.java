@@ -1,30 +1,45 @@
 package proyecto.tarea1_disenosoftware.services;
 
+import proyecto.tarea1_disenosoftware.*;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import proyecto.tarea1_disenosoftware.Funcion;
-import proyecto.tarea1_disenosoftware.users.Usuario;
 
 public class GestorFunciones {
 
-    public boolean modificarFuncion(Funcion funcion, java.util.Date nuevaHora) {
-        if (funcion == null || nuevaHora == null) {
-            return false;
-        }
-        if (nuevaHora.before(new java.util.Date())) {
-            System.out.println("[GestorFunciones] Hora inválida: en el pasado.");
-            return false;
-        }
-        funcion.setHora(nuevaHora);
-        System.out.println("[GestorFunciones] Funcion actualizada a: " + nuevaHora);
-        return true;
+    // listas simples para cumplir el diagrama (puedes adaptarlas a tu código real)
+    private final List<Sala> salas;
+    private final List<Funcion> funciones;
+
+    public GestorFunciones(List<Sala> salas, List<Funcion> funciones) {
+        this.salas = salas;
+        this.funciones = funciones;
     }
 
-    public List<Usuario> obtenerUsuariosAfectados(Funcion funcion) {
-        List<Usuario> lista = new ArrayList<>();
-        // Simulamos usuarios; puedes extender para setear emails, etc.
-        lista.add(new Usuario());
-        lista.add(new Usuario());
-        return lista;
+    // ==== Lo que "ve" el admin (listar funciones y salas) ====
+    public List<String> listarFuncionesYSalas() {
+        List<String> out = new ArrayList<>();
+        for (Funcion f : funciones) {
+            out.add("Función " + f.getId() + " @ " + f.getSala().getNombre());
+        }
+        return out;
+    }
+
+    // ==== Caso 2: self-call en Funcion ====
+    public void modificarDatos(String idFuncion, LocalDateTime nuevaFecha) {
+        for (Funcion f : funciones) {
+            if (f.getId().equals(idFuncion)) {
+                f.actualizarDatos(nuevaFecha);
+                break;
+            }
+        }
+    }
+
+    // ==== Caso 2: loop por tipo de asiento en todas las funciones ====
+    public void aplicarTarifaATipo(TipoAsiento tipo, double nuevaTarifa) {
+        for (Funcion f : funciones) {
+            f.aplicarTarifa(tipo, nuevaTarifa);
+        }
     }
 }

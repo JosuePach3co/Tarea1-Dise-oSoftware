@@ -1,50 +1,33 @@
-
 package proyecto.tarea1_disenosoftware;
 
-/**
- *
- * @author pc
- */
-// Principio Abierto/Cerrado (OCP)
-// Esta clase es abstracta cerrada a modificacion pero abierta a extension
-public abstract class Asiento {
-    
-    private String id;
-    private EstadoAsiento estado;
-    
-    public abstract double getPrecio();
-    public abstract String getDescripcion();
+public class Asiento {
+    private final String id;
+    private final TipoAsiento tipo;
+    private EstadoAsiento estado = EstadoAsiento.DISPONIBLE;
 
-    // SRP: solo gestiona su estado
-    public void marcarEnProceso() {
-        this.estado = EstadoAsiento.EN_PROCESO_COMPRA;
-    }
-
-    public void marcarReservado() {
-        this.estado = EstadoAsiento.RESERVADO;
-    }
-
-    public void marcarDisponible() {
-        this.estado = EstadoAsiento.DISPONIBLE;
-    }
-
-    
-    
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
+    public Asiento(String id, TipoAsiento tipo) {
         this.id = id;
+        this.tipo = tipo;
     }
 
-    public EstadoAsiento getEstado() {
-        return estado;
-    }
+    public String getId() { return id; }
+    public TipoAsiento getTipo() { return tipo; }
+    public EstadoAsiento getEstado() { return estado; }
 
-    public void setEstado(EstadoAsiento estado) {
-        this.estado = estado;
+    // ==== usado por tu diagrama ====
+    public void marcarEnProceso() { this.estado = EstadoAsiento.EN_PROCESO; }
+    public void marcarReservado() { this.estado = EstadoAsiento.RESERVADO; }
+    public void marcarDisponible() { this.estado = EstadoAsiento.DISPONIBLE; }
+
+    @Override public String toString() {
+        return id + "(" + tipo + "," + estado + ")";
     }
-       
+    public double getPrecio() {
+    return 0.0; 
+}
+
    
+    public String getDescripcion() {
+        return "Asiento genérico";
+    }
 }

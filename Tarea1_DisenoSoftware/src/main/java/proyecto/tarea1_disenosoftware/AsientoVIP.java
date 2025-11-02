@@ -1,15 +1,14 @@
-
 package proyecto.tarea1_disenosoftware;
 
-/**
- *
- * @author pc
- */
 public class AsientoVIP extends Asiento {
-    
+
+    public AsientoVIP(String id) {
+        super(id, TipoAsiento.VIP);
+    }
+
     @Override
     public double getPrecio() {
-        return 20.0; 
+        return 15.0;
     }
 
     @Override
