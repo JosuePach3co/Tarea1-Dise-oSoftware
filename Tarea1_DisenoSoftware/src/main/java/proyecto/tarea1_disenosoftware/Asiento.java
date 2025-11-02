@@ -22,4 +22,12 @@ public class Asiento {
     @Override public String toString() {
         return id + "(" + tipo + "," + estado + ")";
     }
+    public double getPrecio() {
+    return 0.0; 
+}
+
+   
+    public String getDescripcion() {
+        return "Asiento genérico";
+    }
 }

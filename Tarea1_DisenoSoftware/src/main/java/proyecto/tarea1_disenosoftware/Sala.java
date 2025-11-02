@@ -33,4 +33,8 @@ public class Sala {
         }
         return out;
     }
+    public Sala(int numero) {
+    this.nombre = "Sala-" + numero;      
+    this.asientos = new ArrayList<>();   
+    }
 }
