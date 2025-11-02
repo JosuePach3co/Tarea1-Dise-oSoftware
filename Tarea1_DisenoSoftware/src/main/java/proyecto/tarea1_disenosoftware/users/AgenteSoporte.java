@@ -22,11 +22,24 @@ public class AgenteSoporte implements GestionSoporte {
     @Override
     public void atenderReporte(Reporte reporte) {
         // Lógica para atender
+         atenderReporteYResolver(reporte);
     }
+
+    public boolean atenderReporteYResolver(Reporte reporte) {
+        System.out.println("[AgenteSoporte] Atendiendo reporte: " + reporte.getDescripcion());
+        boolean resuelto = (reporte.getDescripcion() != null) && (reporte.getDescripcion().length() % 2 == 0);
+        if (resuelto) {
+            System.out.println("[AgenteSoporte] Reporte resuelto.");
+        } else {
+            System.out.println("[AgenteSoporte] No pudo resolver el reporte, se deberá escalar.");
+        }
+        return resuelto;
+    }
+
 
     @Override
     public void escalarReporte(Reporte reporte) {
-        // Lógica para escalar
+        System.out.println("[AgenteSoporte] Escalando reporte: " + reporte.getIdReporte());
     }
 
     public List<Reporte> getReportesAsignados() {
